@@ -136,8 +136,8 @@ $saveNoteBtn.on("click", handleNoteSave);
 $noteList.on("click", ".list-group-item", handleNoteView);
 $newNoteBtn.on("click", handleNewNoteView);
 $noteList.on("click", ".delete-note", handleNoteDelete);
-$noteTitle.on("keyup", handleRenderSaveBtn);
-$noteText.on("keyup", handleRenderSaveBtn);
+$noteTitle.on("keydown", handleRenderSaveBtn);
+$noteText.on("keydown", handleRenderSaveBtn);
 
 // Gets and renders the initial list of notes
 getAndRenderNotes();
