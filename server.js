@@ -54,7 +54,7 @@ app.post("/api/notes", function(req,res) {
        // make it a string so you can write it to the file
        notesData = JSON.stringify(notesData);
        // writes new note to file
-       fs.writeFile("./db/db.json", notesData, "utf8", function(err) {
+       fs.writeFile("./db/db.json", notesData, "utf8", err => {
            if (err) throw err;
        });
 
@@ -74,14 +74,14 @@ app.delete("/api/notes/:id", function(req,res) {
         
         notesData = JSON.parse(notesData);
         //delete old notes from array 
-        notesData = notesData.filter(function(note) {
+        notesData = notesData.filter(note => {
             return note.id != req.params.id;
         });
 
         notesData = JSON.stringify(notesData);
 
         //write new current notes to file
-        fs.writeFile("./db/db.json", notesData, "utf8", function(err) {
+        fs.writeFile("./db/db.json", notesData, "utf8", err => {
             if (err) throw err;
         });
         res.send(JSON.parse(notesData));
@@ -94,15 +94,15 @@ app.delete("/api/notes/:id", function(req,res) {
 
  //HTML GET requests
 
-app.get("/notes", function(req, res) {
+app.get("/notes", req, res => {
      res.sendFile(path.join(__dirname, "public/notes.html"));
 });
 // if no matching route is found, default to home
-app.get("*", function(req, res) {
+app.get("*", req, res => {
    res.sendFile(path.join(__dirname, "public/index.html"));
 });
 
-app.get("/api/notes", function(req, res) {
+app.get("/api/notes", req, res => {
    res.sendFile(path.join(__dirname, "db/db.json"));
 });
 //port listener
